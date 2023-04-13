@@ -2,7 +2,7 @@
 var http = require('http');
 
 // Require fs module
-var fs = require('fs');
+const fs = require('fs');
 
 // Require minimist module (make sure you install this one via npm).
 const minimist = require('minimist');
@@ -18,7 +18,7 @@ const port = args.port || 3000;
 // The function must read a file located at `./public/index.html` and do some stuff with it.
 // The stuff that should be inside this function is all below.
 
-fs.readFile('./www/index.html', (err, data) => {
+fs.readFile('./public/index.html', (err, data) => {
     if(err) {
         console.error(err)
         return;
