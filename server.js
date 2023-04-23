@@ -1,32 +1,33 @@
 // Require http module
-import { createServer } from 'http';
+const http = require('http');
 
 // Require fs module
-import { readFile } from 'fs';
+const fs = require('fs');
 
 // Require minimist module (make sure you install this one via npm).
-import minimist from 'minimist';
+const minimist = require('minimist');
 
 // Use minimist to process one argument `--port=` on the command line after `node server.js`.
-var args = minimist(process.argv.slice(2));
+const args = minimist(process.argv.slice(2));
 
 // Define a const `port` using the argument from the command line. 
 // Make this const default to port 3000 if there is no argument given for `--port`.
+args["port"]
 const port = args.port || process.env.PORT|| 3000;
 // Use the fs module to create an arrow function using `fs.readFile`.
 // Use the documentation for the Node.js `fs` module. 
 // The function must read a file located at `./public/index.html` and do some stuff with it.
 // The stuff that should be inside this function is all below.
 
-readFile('./public/index.html', 'utf8', (err, data) => {
+fs.readFile('./public/index.html', 'utf8', (err, data) => {
 
 
 // If there is an error, put it on the console error and return. 
 // Do not be nice about exiting.
-if(err) {
-    console.error(err)
-    return;
-}
+    if(err) {
+        console.error(err);
+        return;
+    }
 
 // Define a const `server` as an arrow function using http.createServer. 
 // Use the documentation for the node.js http module. 
@@ -35,11 +36,11 @@ if(err) {
 // 2. set a header with content type `text/html`, and 
 // 3. end with the data that you are reading in from ./public/index.html.
 
-const server = createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/html');
-    res.end(data);
-})
+    const server = http.createServer((req, res) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/html');
+        res.end(data);
+    })
 
 
 
@@ -47,8 +48,8 @@ const server = createServer((req, res) => {
 // Put the exact message `Server listening on port ${port}` on the console log. 
 
     
-server.listen(port);
-console.log(`Server listening on port: ${port}`);
+    server.listen(port);
+    console.log(`Server listening on port: ${port}`);
 
 
 })
