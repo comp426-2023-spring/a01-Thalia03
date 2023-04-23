@@ -38,9 +38,14 @@ fs.readFile("./public/index.html", "utf8", (err, dt) => {
 // 3. end with the data that you are reading in from ./public/index.html.
 
 const server = http.createServer((req, res) => {
+    fs.readFile("./public/index.html", "utf8", (err, dt) => {
+        if(err) {
+            console.error(err); return;
+        }
     res.writeHead(200, {"Content-Type": "text/html"});
     res.end(dt);
-})
+    });
+});
 
 
 
